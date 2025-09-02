@@ -31,7 +31,17 @@ SECRET_KEY = 'django-insecure-7a&-143c(d&vh@0ou(!*%894@5m_3@ipuh(09+ovgth5%b4n*1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+CSRF_TRUSTED_ORIGINS = [
+    "https://psychic-space-broccoli-jjjp49wxr6pph57pq-8000.app.github.dev",
+    "http://localhost:8000",
+    "https://localhost:8000",
+]
+
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    "psychic-space-broccoli-jjjp49wxr6pph57pq-8000.app.github.dev",
+]
 
 
 # Application definition
@@ -84,7 +94,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'backendInacap',
         'USER': 'root',
-        'PASSWORD': 'admin',
+        'PASSWORD': 'root',
         'HOST': 'localhost',
         'PORT': '3306',
     }
