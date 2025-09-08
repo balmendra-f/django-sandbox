@@ -1,0 +1,48 @@
+[
+  {
+    "model": "biblioteca.nacionalidad",
+    "pk": 1,
+    "fields": {"pais": "Chile", "nacionalidad": "Chilena"}
+  },
+  {
+    "model": "biblioteca.autor",
+    "pk": 1,
+    "fields": {"nombre": "Gabriela Mistral", "id_nacionalidad": 1, "bio": "Premio Nobel de Literatura"}
+  },
+  {
+    "model": "biblioteca.comuna",
+    "pk": 1,
+    "fields": {"codigo": "SCL", "nombre": "Santiago"}
+  },
+  {
+    "model": "biblioteca.direccion",
+    "pk": 1,
+    "fields": {"id_comuna": 1, "calle": "Av. Libertador", "numero": "123", "departamento": null}
+  },
+  {
+    "model": "biblioteca.biblioteca",
+    "pk": 1,
+    "fields": {"nombre": "Biblioteca Nacional de Chile", "id_direccion": 1}
+  },
+  {
+    "model": "biblioteca.libro",
+    "pk": 1,
+    "fields": {"titulo": "Desolación", "id_autor": 1, "paginas": 200, "copias": 5, "id_biblioteca": 1, "habilitado": true}
+  },
+  {
+    "model": "biblioteca.lector",
+    "pk": 1,
+    "fields": {"rut": "12345678-9", "digito_verificador": "9", "nombre": "Juan Pérez", "id_direccion": 1, "id_biblioteca": 1, "habilitado": true}
+  },
+  {
+    "model": "biblioteca.prestamo",
+    "pk": 1,
+    "fields": {
+      "id_libro": 1,
+      "id_lector": 1,
+      "fecha_prestamo": "2025-09-08T10:00:00Z",
+      "plazo_devolucion": "2025-09-22T10:00:00Z",
+      "fecha_entrega": null
+    }
+  }
+]
