@@ -4,7 +4,7 @@ This README is designed for users who want to quickly run the project.
 
 ---
 
-## 🚀 Requirements
+## Requirements
 
 - Python 3.x  
 - pip  
