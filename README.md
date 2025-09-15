@@ -1,11 +1,10 @@
-# Backend Django con MariaDB
-
-Este proyecto es un backend desarrollado con **Django** y conectado a **MariaDB**.  
-Este README está pensado para usuarios que quieren ejecutar el proyecto rápidamente.
+# Django Backend with MariaDB
+This project is a backend built with **Django** and connected to **MariaDB**.  
+This README is designed for users who want to quickly run the project.
 
 ---
 
-## Requisitos
+## 🚀 Requirements
 
 - Python 3.x  
 - pip  
@@ -14,46 +13,46 @@ Este README está pensado para usuarios que quieren ejecutar el proyecto rápida
 
 ---
 
-## 1️⃣ Clonar el Proyecto
+## 1. Clone the Project
 
 ```bash
-git clone https://github.com/tu-usuario/tu-repo.git
-cd tu-repo/backend-inacap
+git clone https://github.com/balmendra-f/django-sandbox.git
+cd django-sandbox
 
-2️⃣ Instalar Dependencias y Activar Entorno
-# Crear y activar entorno virtual
+2. Install Dependencies and Activate Virtual Environment
+# Create and activate virtual environment
 python3 -m venv env
 source env/bin/activate
 
-# Instalar dependencias
+# Install dependencies
 pip install -r requirements.txt
 
-3️⃣ Configurar Base de Datos y Ejecutar
-
-Inicia MariaDB y crea la base de datos:
-
+3. Configure Database and Run the Server
+Start MariaDB and create the database:
 mysql -u root -p
-CREATE DATABASE nombre_de_tu_base_de_datos;
-
-
-Configura la conexión en backend-inacap/settings.py:
+CREATE DATABASE your_database_name;
+Update the connection settings in django-sandbox/settings.py:
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'nombre_de_tu_base_de_datos',
+        'NAME': 'your_database_name',
         'USER': 'root',
-        'PASSWORD': 'tu_contraseña',
+        'PASSWORD': 'your_password',
         'HOST': 'localhost',
         'PORT': '3306',
     }
 }
-
-
-Ejecuta migraciones y corre el servidor:
+Run migrations and start the development server:
 
 python manage.py migrate
 python manage.py runserver
 
+(Optional) Create a Superuser
+To access the Django Admin Panel:
 
-Accede al backend en http://127.0.0.1:8000/.
+python manage.py createsuperuser
+Then go to: http://127.0.0.1:8000/admin/
+
+Backend available at:
+http://127.0.0.1:8000/
