@@ -1,4 +1,3 @@
-# models.py
 from django.db import models
 from django.core.validators import RegexValidator
 
@@ -8,16 +7,13 @@ class Nacionalidad(models.Model):
     nacionalidad = models.CharField(max_length=100)
     
     def registrar_nacionalidad(self):
-        """Registra una nueva nacionalidad en el sistema"""
         self.save()
         return f"Nacionalidad {self.nacionalidad} registrada exitosamente"
     
     def obtener_nacionalidad(self):
-        """Obtiene los datos de la nacionalidad"""
         return self
     
     def actualizar_nacionalidad(self, pais=None, nacionalidad=None):
-        """Actualiza los datos de la nacionalidad"""
         if pais:
             self.pais = pais
         if nacionalidad:
@@ -26,7 +22,6 @@ class Nacionalidad(models.Model):
         return f"Nacionalidad actualizada exitosamente"
     
     def eliminar_nacionalidad(self):
-        """Elimina la nacionalidad del sistema"""
         nacionalidad_nombre = self.nacionalidad
         self.delete()
         return f"Nacionalidad {nacionalidad_nombre} eliminada exitosamente"
@@ -45,16 +40,13 @@ class Autor(models.Model):
     bio = models.TextField(blank=True, null=True)
     
     def registrar_autor(self):
-        """Registra un nuevo autor en el sistema"""
         self.save()
         return f"Autor {self.nombre} registrado exitosamente"
     
     def obtener_autor(self):
-        """Obtiene los datos del autor"""
         return self
     
     def actualizar_autor(self, nombre=None, bio=None, id_nacionalidad=None):
-        """Actualiza los datos del autor"""
         if nombre:
             self.nombre = nombre
         if bio:
@@ -65,7 +57,6 @@ class Autor(models.Model):
         return f"Autor {self.nombre} actualizado exitosamente"
     
     def eliminar_autor(self):
-        """Elimina el autor del sistema"""
         nombre_autor = self.nombre
         self.delete()
         return f"Autor {nombre_autor} eliminado exitosamente"
@@ -83,16 +74,13 @@ class Comuna(models.Model):
     nombre = models.CharField(max_length=100)
     
     def registrar_comuna(self):
-        """Registra una nueva comuna en el sistema"""
         self.save()
         return f"Comuna {self.nombre} registrada exitosamente"
     
     def obtener_comuna(self):
-        """Obtiene los datos de la comuna"""
         return self
     
     def actualizar_comuna(self, codigo=None, nombre=None):
-        """Actualiza los datos de la comuna"""
         if codigo:
             self.codigo = codigo
         if nombre:
@@ -101,7 +89,6 @@ class Comuna(models.Model):
         return f"Comuna {self.nombre} actualizada exitosamente"
     
     def eliminar_comuna(self):
-        """Elimina la comuna del sistema"""
         nombre_comuna = self.nombre
         self.delete()
         return f"Comuna {nombre_comuna} eliminada exitosamente"
@@ -121,16 +108,13 @@ class Direccion(models.Model):
     departamento = models.CharField(max_length=50, blank=True, null=True)
     
     def registrar_direccion(self):
-        """Registra una nueva dirección en el sistema"""
         self.save()
         return f"Dirección registrada exitosamente"
     
     def obtener_direccion(self):
-        """Obtiene los datos de la dirección"""
         return self
     
     def actualizar_direccion(self, calle=None, numero=None, departamento=None, id_comuna=None):
-        """Actualiza los datos de la dirección"""
         if calle:
             self.calle = calle
         if numero:
@@ -143,7 +127,6 @@ class Direccion(models.Model):
         return f"Dirección actualizada exitosamente"
     
     def eliminar_direccion(self):
-        """Elimina la dirección del sistema"""
         self.delete()
         return f"Dirección eliminada exitosamente"
     
@@ -164,16 +147,13 @@ class Biblioteca(models.Model):
     id_direccion = models.OneToOneField(Direccion, on_delete=models.CASCADE)
     
     def registrar_biblioteca(self):
-        """Registra una nueva biblioteca en el sistema"""
         self.save()
         return f"Biblioteca {self.nombre} registrada exitosamente"
     
     def obtener_biblioteca(self):
-        """Obtiene los datos de la biblioteca"""
         return self
     
     def actualizar_biblioteca(self, nombre=None, id_direccion=None):
-        """Actualiza los datos de la biblioteca"""
         if nombre:
             self.nombre = nombre
         if id_direccion:
@@ -182,7 +162,6 @@ class Biblioteca(models.Model):
         return f"Biblioteca {self.nombre} actualizada exitosamente"
     
     def eliminar_biblioteca(self):
-        """Elimina la biblioteca del sistema"""
         nombre_biblioteca = self.nombre
         self.delete()
         return f"Biblioteca {nombre_biblioteca} eliminada exitosamente"
@@ -204,16 +183,13 @@ class Libro(models.Model):
     habilitado = models.BooleanField(default=True)
     
     def registrar_libro(self):
-        """Registra un nuevo libro en el sistema"""
         self.save()
         return f"Libro '{self.titulo}' registrado exitosamente"
     
     def buscar_libro(self):
-        """Busca y retorna el libro"""
         return self
     
     def actualizar_libro(self, titulo=None, paginas=None, copias=None, habilitado=None):
-        """Actualiza los datos del libro"""
         if titulo:
             self.titulo = titulo
         if paginas:
@@ -252,16 +228,13 @@ class Lector(models.Model):
     habilitado = models.BooleanField(default=True)
     
     def agregar_lector(self):
-        """Agrega un nuevo lector al sistema"""
         self.save()
         return f"Lector {self.nombre} agregado exitosamente"
     
     def buscar_lector(self):
-        """Busca y retorna el lector"""
         return self
     
     def actualizar_lector(self, nombre=None, id_direccion=None, habilitado=None):
-        """Actualiza los datos del lector"""
         if nombre:
             self.nombre = nombre
         if id_direccion:
@@ -272,7 +245,6 @@ class Lector(models.Model):
         return f"Lector {self.nombre} actualizado exitosamente"
     
     def eliminar_lector(self):
-        """Elimina el lector del sistema"""
         nombre_lector = self.nombre
         self.delete()
         return f"Lector {nombre_lector} eliminado exitosamente"
@@ -293,9 +265,7 @@ class Prestamo(models.Model):
     fecha_entrega = models.DateTimeField(null=True, blank=True)
     
     def prestar_libro(self):
-        """Registra un nuevo préstamo de libro"""
         if self.id_libro.copias > 0 and self.id_lector.habilitado:
-            # Reducir el número de copias disponibles
             self.id_libro.copias -= 1
             self.id_libro.save()
             self.save()
@@ -304,10 +274,8 @@ class Prestamo(models.Model):
             return "No se puede realizar el préstamo: libro sin copias disponibles o lector inhabilitado"
     
     def devolver_libro(self):
-        """Registra la devolución de un libro"""
         if not self.fecha_entrega:
             self.fecha_entrega = models.timezone.now()
-            # Aumentar el número de copias disponibles
             self.id_libro.copias += 1
             self.id_libro.save()
             self.save()
@@ -316,7 +284,6 @@ class Prestamo(models.Model):
             return "Este libro ya fue devuelto"
     
     def aplazar_entrega(self, nuevo_plazo):
-        """Aplaza la fecha de entrega del préstamo"""
         if not self.fecha_entrega:
             self.plazo_devolucion = nuevo_plazo
             self.save()

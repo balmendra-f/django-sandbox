@@ -21,7 +21,6 @@ router.register(r'libros', LibroViewSet)
 router.register(r'lectores', LectorViewSet)
 router.register(r'prestamos', PrestamoViewSet)
 
-# ⚠️ IMPORTANTE: urlpatterns debe ser una lista
 urlpatterns = [
     path('', include(router.urls)),
 ]

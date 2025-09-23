@@ -1,4 +1,3 @@
-# admin.py
 from django.contrib import admin
 from .models import Nacionalidad, Autor, Comuna, Direccion, Biblioteca, Libro, Lector, Prestamo
 
@@ -85,6 +84,6 @@ class PrestamoAdmin(admin.ModelAdmin):
     estado.short_description = 'Estado'
     
     def get_readonly_fields(self, request, obj=None):
-        if obj:  # Si el objeto ya existe (editando)
+        if obj: 
             return self.readonly_fields + ('fecha_prestamo',)
         return self.readonly_fields
