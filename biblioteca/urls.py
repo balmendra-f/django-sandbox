@@ -12,14 +12,14 @@ from .views import (
 )
 
 router = DefaultRouter()
-router.register(r'nacionalidades', NacionalidadViewSet)
-router.register(r'autores', AutorViewSet)
-router.register(r'comunas', ComunaViewSet)
-router.register(r'direcciones', DireccionViewSet)
-router.register(r'bibliotecas', BibliotecaViewSet)
-router.register(r'libros', LibroViewSet)
-router.register(r'lectores', LectorViewSet)
-router.register(r'prestamos', PrestamoViewSet)
+router.register(r'nacionalidades', NacionalidadViewSet, basename='nacionalidad')
+router.register(r'autores', AutorViewSet, basename='autor')
+router.register(r'comunas', ComunaViewSet, basename='comuna')
+router.register(r'direcciones', DireccionViewSet, basename='direccion')
+router.register(r'bibliotecas', BibliotecaViewSet, basename='biblioteca')
+router.register(r'libros', LibroViewSet, basename='libro')
+router.register(r'lectores', LectorViewSet, basename='lector')
+router.register(r'prestamos', PrestamoViewSet, basename='prestamo')
 
 urlpatterns = [
     path('', include(router.urls)),
