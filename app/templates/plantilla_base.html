@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Mi Biblioteca{% endblock %}</title>
+  {% load static %} {% load bootstrap5 %} {% bootstrap_css %}
+</head>
+<body>
+  <header>
+    <!-- tu header aquí -->
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer>
+    <!-- tu footer aquí -->
+  </footer>
+
+  {% bootstrap_javascript %}
+</body>
+</html>

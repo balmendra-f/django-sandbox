@@ -36,9 +36,9 @@ urlpatterns = [
     path('libros/', views.listado_libros, name='listado_libros'),
 
     # Autenticación
-    path('accounts/login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
-    path('accounts/logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
-    path('accounts/registro/', views.registro, name='registro'),
+    path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
+    path('register/', views.registro, name='registro'),
 
     # Documentación DRF (Swagger / Redoc)
     path('swagger<format>/', schema_view.without_ui(cache_timeout=0), name='schema-json'),
