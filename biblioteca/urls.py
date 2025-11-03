@@ -8,7 +8,8 @@ from .views import (
     BibliotecaViewSet,
     LibroViewSet,
     LectorViewSet,
-    PrestamoViewSet
+    PrestamoViewSet,
+    CategoriaViewSet,
 )
 
 router = DefaultRouter()
@@ -20,6 +21,7 @@ router.register(r'bibliotecas', BibliotecaViewSet)
 router.register(r'libros', LibroViewSet)
 router.register(r'lectores', LectorViewSet)
 router.register(r'prestamos', PrestamoViewSet)
+router.register(r'categorias', CategoriaViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

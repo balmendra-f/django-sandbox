@@ -46,6 +46,9 @@ INSTALLED_APPS = [
     "biblioteca",
     'rest_framework',
     "app",
+    "bootstrap5",
+    "django_filters",
+    "widget_tweaks",
 ]
 
 MIDDLEWARE = [

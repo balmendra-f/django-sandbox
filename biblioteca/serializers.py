@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Nacionalidad, Autor, Comuna, Direccion, Biblioteca, Libro, Lector, Prestamo
+from .models import Nacionalidad, Autor, Comuna, Direccion, Biblioteca, Libro, Lector, Prestamo, Categoria
 
 class NacionalidadSerializer(serializers.ModelSerializer):
     class Meta:
@@ -40,3 +40,8 @@ class PrestamoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Prestamo
         fields = "__all__"
+
+class CategoriaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Categoria
+        fields = '__all__'

@@ -1,5 +1,14 @@
 from django.contrib import admin
-from .models import Nacionalidad, Autor, Comuna, Direccion, Biblioteca, Libro, Lector, Prestamo
+from .models import (
+    Nacionalidad,
+    Autor,
+    Comuna,
+    Direccion,
+    Biblioteca,
+    Libro,
+    Lector,
+    Prestamo
+)
 
 
 @admin.register(Nacionalidad)
@@ -12,10 +21,10 @@ class NacionalidadAdmin(admin.ModelAdmin):
 @admin.register(Autor)
 class AutorAdmin(admin.ModelAdmin):
     list_display = ('nombre', 'id_nacionalidad', 'bio_preview')
-    search_fields = ('nombre', 'bio')
+    search_fields = ('nombre', 'bio', 'pseudonimo')
     list_filter = ('id_nacionalidad',)
     raw_id_fields = ('id_nacionalidad',)
-    
+
     def bio_preview(self, obj):
         if obj.bio:
             return obj.bio[:50] + "..." if len(obj.bio) > 50 else obj.bio
@@ -33,7 +42,7 @@ class ComunaAdmin(admin.ModelAdmin):
 @admin.register(Direccion)
 class DireccionAdmin(admin.ModelAdmin):
     list_display = ('calle', 'numero', 'departamento', 'id_comuna')
-    search_fields = ('calle', 'numero')
+    search_fields = ('calle', 'numero', 'id_comuna__nombre')
     list_filter = ('id_comuna',)
     raw_id_fields = ('id_comuna',)
 
@@ -41,9 +50,9 @@ class DireccionAdmin(admin.ModelAdmin):
 @admin.register(Biblioteca)
 class BibliotecaAdmin(admin.ModelAdmin):
     list_display = ('nombre', 'get_direccion')
-    search_fields = ('nombre',)
+    search_fields = ('nombre', 'id_direccion__calle')
     raw_id_fields = ('id_direccion',)
-    
+
     def get_direccion(self, obj):
         return str(obj.id_direccion)
     get_direccion.short_description = 'Dirección'
@@ -65,7 +74,7 @@ class LectorAdmin(admin.ModelAdmin):
     list_filter = ('id_biblioteca', 'habilitado')
     raw_id_fields = ('id_direccion', 'id_biblioteca')
     list_editable = ('habilitado',)
-    
+
     def get_direccion(self, obj):
         return f"{obj.id_direccion.calle} {obj.id_direccion.numero}"
     get_direccion.short_description = 'Dirección'
@@ -78,12 +87,12 @@ class PrestamoAdmin(admin.ModelAdmin):
     list_filter = ('fecha_prestamo', 'plazo_devolucion', 'fecha_entrega')
     raw_id_fields = ('id_libro', 'id_lector')
     date_hierarchy = 'fecha_prestamo'
-    
+
     def estado(self, obj):
         return "Devuelto" if obj.fecha_entrega else "Prestado"
     estado.short_description = 'Estado'
-    
+
     def get_readonly_fields(self, request, obj=None):
-        if obj: 
+        if obj:
             return self.readonly_fields + ('fecha_prestamo',)
         return self.readonly_fields
