@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import pymysql
+from decouple import config
 
 # Makes PyMySQL act as MySQLdb so Django can connect to MariaDB/MySQL
 # without needing to install the compiled mysqlclient package
@@ -26,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-7a&-143c(d&vh@0ou(!*%894@5m_3@ipuh(09+ovgth5%b4n*1'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -88,12 +89,12 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'backendInacap',
-        'USER': 'django_user',
-        'PASSWORD': 'admin',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'ENGINE': config('DB_ENGINE'),
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASS'),
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT'),
     }
 }
 
@@ -141,3 +142,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/'       # redirige al home tras login
 LOGOUT_REDIRECT_URL = '/'      # redirige al home tras logout
 LOGIN_URL = '/login/'   
+
+SESSION_COOKIE_SECURE = False   # permite enviar sessionid en HTTP
+CSRF_COOKIE_SECURE = False      # permite enviar csrftoken en HTTP
+SESSION_COOKIE_SAMESITE = 'Lax' # evita bloqueos por SameSite
+CSRF_COOKIE_SAMESITE = 'Lax'

@@ -1,8 +1,17 @@
 from django.db import models
-from django.core.validators import RegexValidator
+from django.core.exceptions import ValidationError
 from django.utils import timezone
+from rut_chile import rut_chile
 
 
+# --- VALIDACIÓN PERSONALIZADA DE RUT ---
+def validar_rut(rut):
+    """Valida el formato y dígito verificador del RUT chileno."""
+    if not rut_chile.is_valid_rut(rut):
+        raise ValidationError('RUT inválido.')
+
+
+# --- MODELOS ---
 class Nacionalidad(models.Model):
     pais = models.CharField(max_length=100)
     nacionalidad = models.CharField(max_length=100)
@@ -102,9 +111,8 @@ class Lector(models.Model):
     rut = models.CharField(
         max_length=12,
         unique=True,
-        validators=[RegexValidator(regex=r'^\d{7,8}-[0-9kK]$', message='Formato de RUT inválido')]
+        validators=[validar_rut]
     )
-    digito_verificador = models.CharField(max_length=1)
     nombre = models.CharField(max_length=200)
     id_direccion = models.ForeignKey(Direccion, on_delete=models.CASCADE)
     id_biblioteca = models.ForeignKey(Biblioteca, on_delete=models.CASCADE)
