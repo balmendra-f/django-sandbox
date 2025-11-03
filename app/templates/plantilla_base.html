@@ -1,23 +1,19 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>{% block title %}Mi Biblioteca{% endblock %}</title>
-  {% load static %} {% load bootstrap5 %} {% bootstrap_css %}
-</head>
-<body>
-  <header>
-    <!-- tu header aquí -->
-  </header>
-
-  <main>
-    {% block content %}{% endblock %}
-  </main>
-
-  <footer>
-    <!-- tu footer aquí -->
-  </footer>
-
-  {% bootstrap_javascript %}
-</body>
+<html>
+  <head>
+    <title>Biblioteca</title>
+  </head>
+  <body>
+    {% if user.is_authenticated %}
+    <p>
+      Hi {{ user.username }}!
+      <a href="{% url 'logout' %}">Cerrar sesión</a>
+    </p>
+    {% else %}
+    <p>
+      <a href="{% url 'login' %}">Iniciar sesión</a> or
+      <a href="{% url 'registro' %}">Registrarse</a>
+    </p>
+    {% endif %} {% block content %} {% endblock %}
+  </body>
 </html>
