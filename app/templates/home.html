@@ -2,7 +2,7 @@
 <html lang="es">
   <head>
     <title>{% block title %}{% endblock %}</title>
-    {% load django_bootstrap5 %} {% bootstrap_css %} {% bootstrap_javascript %}
+    {% load bootstrap5 %} {% bootstrap_css %} {% bootstrap_javascript %}
   </head>
 
   <body class="bg-light text-dark">
@@ -12,7 +12,7 @@
         class="container py-3 d-flex justify-content-between align-items-center"
       >
         <h1 class="h3 fw-bold text-primary mb-0">Biblioteca Miblio</h1>
-        <nav>
+        <nav class="d-flex align-items-center gap-2">
           <a href="#libros" class="text-dark text-decoration-none px-2"
             >Libros</a
           >
@@ -25,6 +25,23 @@
           <a href="#prestamos" class="text-dark text-decoration-none px-2"
             >Préstamos</a
           >
+
+          {% if request.user.is_authenticated %}
+          <span class="text-muted px-2">Hola, {{ request.user.username }}</span>
+          <form action="{% url 'logout' %}" method="post" class="d-inline">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-outline-danger btn-sm">
+              Salir
+            </button>
+          </form>
+          {% else %}
+          <a href="{% url 'login' %}" class="btn btn-outline-primary btn-sm"
+            >Login</a
+          >
+          <a href="{% url 'registro' %}" class="btn btn-primary btn-sm">Registro</a>
+            >Registro</a
+          >
+          {% endif %}
         </nav>
       </div>
     </header>

@@ -46,8 +46,11 @@ INSTALLED_APPS = [
     "biblioteca",
     'rest_framework',
     "app",
-    "django_bootstrap5",
+    "bootstrap5",
     "django_filters",
+    "widget_tweaks",
+    "iconic",
+    "drf_yasg",
 ]
 
 MIDDLEWARE = [
@@ -85,8 +88,12 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'backendInacap',
+        'USER': 'django_user',
+        'PASSWORD': 'admin',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
@@ -134,8 +141,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/'       # redirige al home tras login
 LOGOUT_REDIRECT_URL = '/'      # redirige al home tras logout
 LOGIN_URL = '/login/'   
-
-# Session settings
-SESSION_COOKIE_AGE = 3600
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-SESSION_ENGINE = 'django.contrib.sessions.backends.db'
