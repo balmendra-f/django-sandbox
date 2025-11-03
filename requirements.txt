@@ -1,7 +1,7 @@
 asgiref==3.9.1
 beautifulsoup4==4.14.2
 Django==5.2.7
-django-bootstrap-v5==1.0.11
+django-bootstrap5
 django-filter==25.2
 django-widget-tweaks==1.5.0
 djangorestframework==3.16.1
