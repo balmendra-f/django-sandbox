@@ -1,20 +1,12 @@
-# /app/urls.py
 from django.contrib import admin
 from django.urls import path, include
-from app import views  # nuestras vistas
+from app import views  
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    # Admin
     path('admin/', admin.site.urls),
-
-    # App biblioteca
-    path('api/', include('biblioteca.urls')),  # URLs de la app biblioteca
-
-    # Home
+    path('api/', include('biblioteca.urls')), 
     path('', views.home_template, name='home'),
-
-    # Listado de libros (login requerido)
     path('libros/', views.listado_libros, name='listado_libros'),
 
     # Autenticación
