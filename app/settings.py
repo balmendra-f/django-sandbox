@@ -14,8 +14,6 @@ from pathlib import Path
 import pymysql
 from decouple import config
 
-# Makes PyMySQL act as MySQLdb so Django can connect to MariaDB/MySQL
-# without needing to install the compiled mysqlclient package
 pymysql.install_as_MySQLdb()
 
 
@@ -53,6 +51,8 @@ INSTALLED_APPS = [
     "iconic",
     "drf_yasg",
 ]
+CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8000']
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -80,6 +80,16 @@ TEMPLATES = [
         },
     },
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ]
+}
 
 WSGI_APPLICATION = 'app.wsgi.application'
 
@@ -139,11 +149,11 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-LOGIN_REDIRECT_URL = '/'       # redirige al home tras login
-LOGOUT_REDIRECT_URL = '/'      # redirige al home tras logout
+LOGIN_REDIRECT_URL = '/'      
+LOGOUT_REDIRECT_URL = '/'     
 LOGIN_URL = '/login/'   
 
-SESSION_COOKIE_SECURE = False   # permite enviar sessionid en HTTP
-CSRF_COOKIE_SECURE = False      # permite enviar csrftoken en HTTP
-SESSION_COOKIE_SAMESITE = 'Lax' # evita bloqueos por SameSite
+SESSION_COOKIE_SECURE = False   
+CSRF_COOKIE_SECURE = False     
+SESSION_COOKIE_SAMESITE = 'Lax' 
 CSRF_COOKIE_SAMESITE = 'Lax'

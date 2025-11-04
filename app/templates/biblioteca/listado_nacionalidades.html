@@ -5,13 +5,13 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Listado de Libros</title>
+    <title>Listado de Nacionalidades</title>
     <link rel="stylesheet" href="{% static 'css/estilos_libros.css' %}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <header class="container my-4">
-        <h1>Listado de Libros</h1>
+        <h1>Listado de Nacionalidades</h1>
     </header>
 
     <main class="container">
@@ -32,19 +32,17 @@
         <hr>
 
         <div class="row">
-            {% for libro in filter.qs %}
-            <div class="col-sm-4 mb-3 tarjeta-libro">
+            {% for nacionalidad in filter.qs %}
+            <div class="col-sm-4 mb-3">
                 <div class="card h-100">
-                    <div class="card-header">{{ libro.titulo }}</div>
+                    <div class="card-header">{{ nacionalidad.nacionalidad }}</div>
                     <div class="card-body">
-                        <h5 class="card-title">{{ libro.id_autor.nombre }}</h5>
-                        <p class="card-text">Categoría: {{ libro.id_categoria.nombre }}</p>
-                        <a href="#" class="btn btn-primary">Ver Detalle</a>
+                        <p class="card-text">País: {{ nacionalidad.pais }}</p>
                     </div>
                 </div>
             </div>
             {% empty %}
-            <p>No hay libros que coincidan con los filtros.</p>
+            <p>No hay nacionalidades que coincidan con los filtros.</p>
             {% endfor %}
         </div>
     </main>

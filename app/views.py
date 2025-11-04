@@ -2,7 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from biblioteca.models import Libro
+from biblioteca.models import Nacionalidad
 from biblioteca.views import LibroFilter
+from biblioteca.views import NacionalidadFilter
 from django.contrib import messages
 from django.contrib.auth import login
 
@@ -14,6 +16,11 @@ def listado_libros(request):
     f = LibroFilter(request.GET, queryset=Libro.objects.all())
     return render(request, "biblioteca/lista_libros.html", {"filter": f})
 
+@login_required
+def listado_nacionalidades(request):
+    f = NacionalidadFilter(request.GET, queryset=Nacionalidad.objects.all())
+    return render(request, "biblioteca/listado_nacionalidades.html", {"filter": f})
+
 def registro(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -21,11 +28,9 @@ def registro(request):
             user = form.save()
             login(request, user)
 
-            # --- DIAGNÓSTICO DE LA SESIÓN ---
             print("Contenido de la sesión después del login:")
             for key, value in request.session.items():
                 print(f"{key}: {value}")
-            # --------------------------------
 
             messages.success(request, "Registro Exitoso. ¡Bienvenido!")
             return redirect('/')
